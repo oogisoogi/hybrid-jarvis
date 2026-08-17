@@ -34,6 +34,15 @@
 | `cso-system-sentinel.sh` | 경량 시스템 센티널(부하·프로세스 누적 감시 → 임계 시 지휘 세션을 깨움). "관측원은 부하와 정상관이어야 한다" 원칙의 구현. ⚠ 선택 의존: `cso-autoclear-safety-gate.sh`(이 레포 미포함)를 있으면 토큰 실측에 쓰고, **없으면 보수적 발화로 자동 폴백**한다(부재가 오류 아님). |
 | `cmux-master-health.sh` | 정기 발화 전 건강 게이트(master 생존·채널 정상 확인). |
 
+## 선택 의존 (이 레포 미포함 · 없어도 fail-soft)
+
+일부 스크립트는 우리 실운영의 형제 스크립트를 참조합니다. **없으면 해당 지점에서 보수적 폴백으로 빠지며 죽지 않습니다**:
+
+- `cso-autoclear-safety-gate.sh` (sentinel의 토큰 실측) → 부재 시 보수적 발화
+- `stall_classify.py` (sentinel의 멈춤 분류) → 부재 시 해당 분류 생략
+- `cycle-restore-template.md` (master-send `--cycle`의 복원 포인터 본문) → 자기 서식으로 만들어 경로 지정
+- `javis_panetitle.py` (spawn-worker의 페인 제목) → 부재 시 제목 미적용
+
 ## 설치 순서 권장
 
 1. `jarvis-who.sh`·`cys-who.sh` 먼저 — 주소 해석이 모든 것의 토대.
