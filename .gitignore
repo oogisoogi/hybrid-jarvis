@@ -1,0 +1,7 @@
+.DS_Store
+*.local
+*.local.md
+.env
+.env.*
+__pycache__/
+*.pyc
